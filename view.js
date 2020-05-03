@@ -67,9 +67,7 @@ function createDomElement(gameContainer){
 
 showGames();
 
-function removeDeletedElementFromDOM(domElement){
-    domElement.remove();
-};
+ removeDeletedElementFromDOM = (domElement) => domElement.remove(); //turned into an arrow function
 
 document.querySelector(".submitBtn").addEventListener("click", function(event){
     event.preventDefault();
