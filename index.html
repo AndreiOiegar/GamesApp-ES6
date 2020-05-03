@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" />
+    <title>Games App</title>
+</head>
+<body>
+    <form class="creationForm">
+        <label for="gameTitle">Title *</label>
+        <input type="text" value="" name="gameTitle" id="gameTitle" />
+
+        <label for="gameDescription">Description</label>
+        <textarea name="gameDescription" id="gameDescription"></textarea>
+
+        <label for="gameGenre">Genre *</label>
+        <select name="gameGenre" id="gameGenre">
+            <option value="">-</option>
+            <option value="Action">Action</option>
+            <option value="Adventure">Adventure</option>
+        </select>
+
+        <label for="gamePublisher">Publisher</label>
+        <input type="text" name="gamePublisher" id="gamePublisher" />
+
+        <label for="gameImageUrl">Image URL *</label>
+        <input type="text" name="gameImageUrl" id="gameImageUrl" />
+
+        <label for="gameRelease">Release Date *</label>
+        <input type="text" name="gameRelease" id="gameRelease" />
+
+        <button class="submitBtn">Create Game</button>
+    </form>
+
+    <div class="container"></div>
+    
+    <script src="/Classes/fetchApi.js"></script>
+    <script src="/Classes/Game.js"></script>
+    <script src="view.js"></script>
+</body>
+</html>
