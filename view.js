@@ -1,4 +1,4 @@
-var apiURL = new FetchApi('https://games-app-siit.herokuapp.com');
+const apiURL = new FetchApi('https://games-app-siit.herokuapp.com');
 
 async function showGames(){
     const arrayOfGames = await apiURL.getGamesList();
@@ -10,8 +10,7 @@ async function showGames(){
 
         document.getElementById(`${game._id}`).addEventListener("click", async function(){
             if(event.target.classList.contains('delete-btn')){
-                const gameDiv = event.target.parentElement;
-                //const delGame = await apiUrl.deleteGame(gameDiv.getAttribute('id'));
+
                 console.log(apiURL);
                 removeDeletedElementFromDOM(document.querySelector('.game-box'));
             } else if(event.target.classList.contains('update-btn')){
@@ -107,16 +106,40 @@ document.querySelector(".submitBtn").addEventListener("click", function(event){
     }
 })
 
-function createGameForm(title, releaseDate, genre, publisher, imageUrl, description) {
-    this.title = title;
-    this.releaseDate = releaseDate;
-    this.genre = genre;
-    this.publisher = publisher;
-    this.imageUrl = imageUrl;
-    this.description = description;
-}
+// function createGameForm(title, releaseDate, genre, publisher, imageUrl, description) {
+//     this.title = title;
+//     this.releaseDate = releaseDate;
+//     this.genre = genre;
+//     this.publisher = publisher;
+//     this.imageUrl = imageUrl;
+//     this.description = description;
+// }
 
-createGameForm.prototype.validateFormElement = function(inputElement, errorMessage) {
+class createGameForm{
+    constructor(title, releaseDate, genre, publisher, imageUrl, description){
+        this.title = title;
+        this.releaseDate = releaseDate;
+        this.genre = genre;
+        this.publisher = publisher;
+        this.imageUrl = imageUrl;
+        this.description = description;
+    }
+
+// createGameForm.prototype.validateFormElement = function(inputElement, errorMessage) {
+//     if(inputElement.value === "") {
+//         if(!document.querySelector('[rel="' + inputElement.id + '"]')){
+//             buildErrorMessage(inputElement, errorMessage);
+//         }
+//     } else {
+//         if(document.querySelector('[rel="' + inputElement.id + '"]')){
+//             console.log("the error is erased!");
+//             document.querySelector('[rel="' + inputElement.id + '"]').remove();
+//             inputElement.classList.remove("inputError");
+//         }
+//     } 
+// }
+
+validateFormElement(inputElement, errorMessage){
     if(inputElement.value === "") {
         if(!document.querySelector('[rel="' + inputElement.id + '"]')){
             buildErrorMessage(inputElement, errorMessage);
@@ -130,13 +153,29 @@ createGameForm.prototype.validateFormElement = function(inputElement, errorMessa
     } 
 }
 
-createGameForm.prototype.validateReleaseTimestampElement = function (inputElement, errorMessage){
+
+// createGameForm.prototype.validateReleaseTimestampElement = function (inputElement, errorMessage){
+//     if(isNaN(inputElement.value) && inputElement.value !== "") {
+//         buildErrorMessage(inputElement, errorMessage);
+//     }
+// }
+
+validateReleaseTimestampElement(inputElement, errorMessage){
     if(isNaN(inputElement.value) && inputElement.value !== "") {
         buildErrorMessage(inputElement, errorMessage);
     }
 }
 
-createGameForm.prototype.buildErrorMessage = function (inputEl, errosMsg){
+// createGameForm.prototype.buildErrorMessage = function (inputEl, errosMsg){
+//     inputEl.classList.add("inputError");
+//     const errorMsgElement = document.createElement("span");
+//     errorMsgElement.setAttribute("rel", inputEl.id);
+//     errorMsgElement.classList.add("errorMsg");
+//     errorMsgElement.innerHTML = errosMsg;
+//     inputEl.after(errorMsgElement);
+// }
+
+buildErrorMessage(inputEl, errorMsg){
     inputEl.classList.add("inputError");
     const errorMsgElement = document.createElement("span");
     errorMsgElement.setAttribute("rel", inputEl.id);
@@ -144,8 +183,20 @@ createGameForm.prototype.buildErrorMessage = function (inputEl, errosMsg){
     errorMsgElement.innerHTML = errosMsg;
     inputEl.after(errorMsgElement);
 }
+// createGameForm.prototype.displayCreatedGame = function(request) {
+//     const gameELement = document.createElement("div");
+//     gameELement.className = "game-box";
+//     gameELement.setAttribute("id", `${request._id}`)
+//     gameELement.innerHTML = `<h1>${request.title}</h1> 
+//                             <img src="${request.imageUrl}" />
+//                             <p>${request.description}</p> 
+//                             <button class="delete-btn">Delete Game</button>
+//                             <button class="edit-btn">Edit Game</button>`;
 
-createGameForm.prototype.displayCreatedGame = function(request) {
+//     return gameELement;
+// }
+
+displayCreatedGame(request){
     const gameELement = document.createElement("div");
     gameELement.className = "game-box";
     gameELement.setAttribute("id", `${request._id}`)
@@ -154,6 +205,6 @@ createGameForm.prototype.displayCreatedGame = function(request) {
                             <p>${request.description}</p> 
                             <button class="delete-btn">Delete Game</button>
                             <button class="edit-btn">Edit Game</button>`;
+}
 
-    return gameELement;
 }
